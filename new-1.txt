@@ -1,0 +1,38 @@
+arrivalT=[]
+burstT=[]
+remainingT=[]
+flag=0
+time=0
+sum_wait=0
+sum_turnaround=0
+i=0
+n = int(input('enter the total number of processes:'))
+remain=n
+for i in xrange(n):  
+	arrivalT.append(int(raw_input('enter p_arrival:'))) 
+	burstT.append(int(raw_input('enter p_burst:'))) 
+	remainingT.append(bt[i])
+	i+=1
+ts=int(input('enter time slice:'))
+i=0
+while remain != 0 :
+	if remainingT[i]<=ts and remainingT[i]>0 :
+		time+=remainingT[i]
+		remainingT[i]=0
+		flag=1
+	elif remainingT[i]>0 :
+		remainingT[i]-=ts
+    	time+=ts
+    if remainingT[i]==0 and flag==1 :
+    	remain--
+		print('P \d',i+1,time-at[i],time-arrivalT[i]-burstT[i])
+    	sum_wait+=time-arrivalT[i]-burstT[i]
+    	sum_turnaround+=time-arrivalT[i]
+    	flag=0
+	if i==n-1 :
+    	i=0
+   	elif arrivalT[i+1]<=time :
+    	i++
+	else count=0	
+print('Avg sum_wait = ',sum_wait*1.0/n)
+print('Avg sum_turnaround = ',sum_turnaround*1.0/n) 
